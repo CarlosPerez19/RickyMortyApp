@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ character?.name || 'Detalles' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-loading *ngIf="loading" message="Cargando..."></ion-loading>
+
+  <div *ngIf="character">
+    <img [src]="character.image" [alt]="character.name" style="width: 100%; max-width: 300px; margin-bottom: 1rem;" />
+    <p><strong>Estado:</strong> {{ character.status }}</p>
+    <p><strong>Especie:</strong> {{ character.species }}</p>
+    <p><strong>Género:</strong> {{ character.gender }}</p>
+
+    <ion-textarea
+      [(ngModel)]="comment"
+      placeholder="Ingresa un comentario sobre este personaje"
+      rows="4"
+      auto-grow="true">
+    </ion-textarea>
+
+    <ion-button expand="block" (click)="saveCharacterWithComment()">Guardar Personaje</ion-button>
+  </div>
+
+  <div *ngIf="errorMessage">
+    <p>{{ errorMessage }}</p>
+  </div>
+</ion-content>
